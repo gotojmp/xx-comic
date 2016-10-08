@@ -1,0 +1,22 @@
+{
+  "name": "xx-comic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gotojmp",
+  "license": "MIT",
+  "dependencies": {
+    "log4js": "^0.6",
+    "mysql2": "^1.1",
+    "node-webcrawler": "https://github.com/gotojmp/node-webcrawler.git",
+    "prompt": "^1.0",
+    "redis": "^2.6",
+    "request": "^2.75",
+    "sequelize": "https://github.com/sequelize/sequelize.git",
+    "striptags": "^2.1"
+  },
+  "devDependencies": {}
+}
