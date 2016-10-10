@@ -43,6 +43,26 @@ module.exports = {
             log.info('***find error:', err);
         });
     },
+    chapterTitle: () => {
+        Chapter.findAll({
+            where: {
+                created_at: {
+                    $eq: DB.col('updated_at')
+                }
+            },
+            // order: [
+            //     ['id', 'ASC']
+            // ],
+            // offset: 0,
+            limit: 80000
+        }).then(chapters => {
+            chapters.forEach(chapter => {
+                starter.book.chapterTitle(chapter);
+            });
+        }).catch(err => {
+            log.info('***find error:', err);
+        });
+    },
     page: () => {
         Chapter.findAll({
             where: {

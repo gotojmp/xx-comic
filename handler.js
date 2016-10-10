@@ -108,6 +108,41 @@ module.exports = {
                 }
             }
         },
+        chapterTitle: (chapter, err, res, $) => {
+            if (err) {
+                return console.log(err);
+            }
+            if (res && res.statusCode == '200' && $) {
+                var type = 0;
+                var title = $('h1.active').html();
+                if (title) {
+                    var names = title.split(chapter.name);
+                    if (names.length == 2) {
+                        title = names[1].replace(/^：/, '').trim();
+                    }
+                } else {
+                    title = $('h1').next('h3').html();
+                    if (title) title = title.trim();
+                }
+                if (!title) title = chapter.name;
+                chapter.update({title});
+                if ($('#cp_img').length) { //可以读取
+                    type = 1;
+                } else if ($('#c_list').length) {
+                    type = 2;
+                } else if ($.html().indexOf('版权方的要求，现已删除清理') > -1) {
+                    type = 3;
+                } else {
+                    log.info('***check chapter error, no rule', chapter.id, chapter.name, chapter.book_id);
+                }
+                console.log(chapter.name, type, title);
+                if (type > 0) {
+                    chapter.getBook().then(book => {
+                        book.update({type});
+                    });
+                }
+            }
+        },
         page: (chapter, err, res, $) => {
             if (err) {
                 return console.log(err);

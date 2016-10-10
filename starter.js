@@ -37,6 +37,16 @@ module.exports = {
                 callback: handler.book.chapter.bind(null, book)
             });
         },
+        chapterTitle: chapter => {
+            c.queue({
+                uri: chapter.url.replace('m.dm5.com', 'www.dm5.com'),
+                ua: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
+                cookie: 'isAdult=1;',
+                retries: 10,
+                rateLimits: 900,
+                callback: handler.book.chapterTitle.bind(null, chapter)
+            });
+        },
         page: chapter => {
             c.queue({
                 uri: chapter.url,

@@ -18,7 +18,8 @@ var Book = DB.define('book', {
     cover: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''},
     desc: {type: Sequelize.TEXT, allowNull: false, defaultValue: ''},
     url: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''},
-    finished: {type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false}
+    finished: {type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false},
+    type: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 0}
 }, {
     indexes: [{
         unique: false,
@@ -59,7 +60,10 @@ var Page = DB.define('page', {
     }]
 });
 Book.hasMany(Chapter);
+Chapter.belongsTo(Book);
+
 Chapter.hasMany(Page);
+Page.belongsTo(Chapter);
 
 // DB.sync().then(() => console.log('sync ok')).catch(err => console.log(err));
 
