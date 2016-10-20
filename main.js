@@ -4,4 +4,4 @@ var task = require('./task');
 
 // task.chapter();
 // task.page();
-task.chapterTitle();
+task.page();

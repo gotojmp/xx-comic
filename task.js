@@ -54,7 +54,7 @@ module.exports = {
             //     ['id', 'ASC']
             // ],
             // offset: 0,
-            limit: 80000
+            limit: 100
         }).then(chapters => {
             chapters.forEach(chapter => {
                 starter.book.chapterTitle(chapter);
@@ -64,20 +64,21 @@ module.exports = {
         });
     },
     page: () => {
-        Chapter.findAll({
+        Book.findAll({
             where: {
-                created_at: {
-                    $eq: DB.col('updated_at')
-                }
+                type: 1,
+                status: 0
             },
-            // order: [
-            //     ['id', 'ASC']
-            // ],
-            // offset: 0,
             limit: 1
-        }).then(chapters => {
-            chapters.forEach(chapter => {
-                starter.book.page(chapter);
+        }).then(books => {
+            books.forEach(book => {
+                book.getChapters().then(chapters => {
+                    chapters.forEach(chapter => {
+                        starter.book.page(chapter);
+                    });
+                }).catch(err => {
+                    log.info('***get chapters error:', err);
+                });
             });
         }).catch(err => {
             log.info('***find error:', err);

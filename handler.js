@@ -128,7 +128,7 @@ module.exports = {
                 chapter.update({title});
                 if ($('#cp_img').length) { //可以读取
                     type = 1;
-                } else if ($('#c_list').length) {
+                } else if ($('#c_list').length) { //站外链接
                     type = 2;
                 } else if ($.html().indexOf('版权方的要求，现已删除清理') > -1) {
                     type = 3;
@@ -154,12 +154,15 @@ module.exports = {
                     var js = $(this).html();
                     if (js.indexOf('eval(') > -1) {
                         js = unpack(js);
-                        console.log(js);
-                        if (js.indexOf('newImgs') > -1) {
-                            var newImgs;
-                            if (js.indexOf('var newImgs=[') === 0) {
-                                eval(js);
-                                console.log(newImgs);
+                        if (js.indexOf('var newImgs=[') === 0) {
+                            var urls = js.match(/'(http:\/\/[^']*)'/g);
+                            if (Array.isArray(urls)) {
+                                var pages = [];
+                                urls.forEach(url => {
+                                    url = url.replace(/'/g, '');
+                                    pages.push({url});
+                                });
+                                saver.book.page(chapter, pages);
                             }
                         }
                     }
