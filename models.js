@@ -19,7 +19,8 @@ var Book = DB.define('book', {
     desc: {type: Sequelize.TEXT, allowNull: false, defaultValue: ''},
     url: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''},
     finished: {type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false},
-    type: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 0}
+    type: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 0},
+    status: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 0}
 }, {
     indexes: [{
         unique: false,
@@ -35,7 +36,8 @@ var Chapter = DB.define('chapter', {
     num: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 1},
     name: {type: Sequelize.STRING(50), allowNull: false, defaultValue: ''},
     title: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''},
-    url: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''}
+    url: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''},
+    status: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 0}
 }, {
     indexes: [{
         unique: true,
@@ -49,7 +51,8 @@ var Page = DB.define('page', {
     id: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, primaryKey: true, autoIncrement: true},
     num: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 1},
     img: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''},
-    url: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''}
+    url: {type: Sequelize.STRING(100), allowNull: false, defaultValue: ''},
+    status: {type: Sequelize.INTEGER.UNSIGNED, allowNull: false, defaultValue: 0}
 }, {
     indexes: [{
         unique: true,
